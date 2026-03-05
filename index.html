@@ -53,11 +53,14 @@
     Loading only what you need keeps the page fast.
     display=swap: shows fallback font while the custom font loads (prevents invisible text).
   -->
-
+<script src="script.js" defer></script>
 <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+<div id="progress-track">    ← HTML: the two divs to render the bar
+    <div id="progress-bar">
+  </div>
 
 <!-- ======================================================================
  TOP OF THE PAGE! 
@@ -614,6 +617,8 @@
   <p>© 2026 Daniel Wells, Ph.D.</p>
   <p>Built with HTML · Hosted on GitHub Pages</p>
 </footer>
+
+
 
 </body>
 </html>
