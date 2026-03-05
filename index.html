@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<!-- 
+  DOCTYPE tells the browser this is an HTML5 document.
+  Always the very first line — without it, browsers enter "quirks mode"
+  and render things inconsistently.
+-->
+
+<html lang="en">
+<!-- 
+  <html> is the root element that wraps everything.
+  lang="en" tells browsers and screen readers the page language is English.
+-->
+
+<head>
+  <!-- 
+    <head> contains metadata — information ABOUT the page, not visible content.
+    Nothing inside <head> renders directly on screen.
+  -->
+
+  <meta charset="UTF-8" />
+  <!-- 
+    Tells the browser to use UTF-8 character encoding.
+    This ensures special characters (accents, symbols, emoji) display correctly.
+    Always include this as the first tag inside <head>.
+  -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- 
+    Critical for mobile responsiveness.
+    Without this, phones render the page at desktop width and shrink it down.
+    width=device-width: match the screen's actual width
+    initial-scale=1.0:  no zoom on first load
+  -->
+
+  <title>Daniel Wells, Ph.D. — Seismologist & AI/ML Researcher</title>
+  <!-- 
+    Text shown in the browser tab and search engine results.
+    Keep it descriptive — it affects SEO.
+  -->
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Mono:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+  <!-- 
+  Go to fonts.google.com. Generate link.
+    Loads three custom fonts from Google Fonts (a free content delivery network CDN):
+      - Playfair Display: serif display font used for h1, h2 headings
+      - DM Mono:          monospace font used for labels, badges, nav links
+      - Lora:             elegant serif used for body text
+    
+    The ?family= parameters specify which font weights/styles to load.
+    wght@400;600;700 = regular, semibold, bold weights.
+    ital,wght@0,400;0,500;1,400 = non-italic regular, non-italic medium, italic regular.
+    
+    Loading only what you need keeps the page fast.
+    display=swap: shows fallback font while the custom font loads (prevents invisible text).
+  -->
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<!-- ======================================================================
+ TOP OF THE PAGE! 
+     NAVIGATION BAR
+     position: fixed means this stays at the top as the user scrolls.
+     The href="#about" links jump to the <section id="about"> anchor on the page.
+====================================================================== -->
+<nav> <!-- could also be <div>, doesn't matter. -->
+  <!-- Logo/name — clicking it scrolls back to top -->
+  <a class="nav-logo" href="#hero">Dan Wells, PhD</a> <!-- href='#hero' send you to hero section on same page-->
+
+  <!-- Navigation links — each href corresponds to a section id below -->
+  <ul class="nav-links"> <!-- ul = unordered list-->
+     <li><a href="#about">About</a></li> <!-- li = list item -->
+    <li><a href="#projects">Projects</a></li> <!-- all of these send you to a new section on the same page (no reloading)-->
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#cv">CV</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul> <!-- end ul-->
+</nav> 
+
+<!-- ======================================================================
+     HERO SECTION
+     Full-viewport-height landing area. id="hero" matches the nav logo href.
+====================================================================== -->
+<section id="hero">
+
+  <!-- Decorative horizontal grid lines (CSS background on this div) -->
+  <div class="hero-bg-line"></div> <!-- Go to styles.css to see what's actually happening here-->
+
+  <!-- All visible hero content is inside this wrapper -->
+  <div class="hero-content"> <!-- CSS something to grab onto --> 
+
+    <!-- Small text above the name — appears first in the stagger animation -->
+    <p class="hero-eyebrow">Geophysics · Machine Learning · Signal Processing</p>
+
+    <!-- ACTUAL HEADER
+    Main name — largest text on the page -->
+    <h1>Daniel Wells</h1>
+
+    <!-- Subtitle in italic Playfair below the name -->
+    <p class="hero-phd">Ph.D. — Seismologist & AI/ML Researcher</p>
+
+    <!-- 1–2 sentence summary -->
+    <p class="hero-desc">
+      Applying deep learning and probabilistic methods to problems in seismology,
+      geosciences, and signal intelligence. 
+    </p>
+
+    <!-- Keyword tags — quick scannable overview of expertise -->
+    <div class="hero-tags">
+      <span class="tag">Seismology</span>
+      <span class="tag">Deep Learning</span>
+      <span class="tag">Signal Processing</span>
+      <span class="tag">Bayesian Inference</span>
+      <span class="tag">Physics-Informed NN</span>
+      <span class="tag">GANs</span>
+      <span class="tag">HPC</span>
+    </div>
+
+    <!-- Call-to-action buttons — anchor links to sections below -->
+    <div class="hero-ctas">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#publications" class="btn btn-secondary">Publications</a>
+      <a href="Wells_CV.pdf" class="btn btn-secondary" download>Download CV</a>
+      <!-- 
+        NOTE: "Download CV" links to #cv section. To make it actually download
+        the PDF, change href to "Wells_CV.pdf" and add the `download` attribute:
+        <a href="Wells_CV.pdf" class="btn btn-secondary" download>Download CV</a>
+        The PDF file must exist in the same folder as index.html in your repo.
+      -->
+    </div>
+  </div>
+
+  <!-- 
+    Seismic waveform SVG decoration at the bottom of the hero.
+    This is an inline SVG (Scalable Vector Graphic) — resolution-independent art drawn in code.
+    viewBox="0 0 1200 60" defines the coordinate space: 1200 units wide, 60 tall.
+    preserveAspectRatio="none" lets it stretch to fill its container.
+    <polyline> draws connected line segments between the x,y coordinate pairs in `points`.
+    The jagged points are hand-crafted to look like a seismic waveform trace.
+  -->
+  <svg class="waveform waveform-hero" viewBox="0 0 1200 60" preserveAspectRatio="none">
+    <polyline fill="none" stroke="#c9a96e" stroke-width="1.2"
+      points="0,30 40,30 50,10 60,50 70,15 80,45 90,28 105,30 130,30 145,5 155,55 165,20 175,40 185,30 220,30 235,8 245,52 255,18 265,42 275,30 310,30 325,12 335,48 345,22 355,38 365,30 400,30 415,4 425,56 435,14 445,46 455,30 490,30 500,20 510,40 520,25 530,35 540,30 580,30 595,6 605,54 615,16 625,44 635,30 670,30 685,10 695,50 705,18 715,42 725,30 760,30 775,8 785,52 795,22 805,38 815,30 850,30 865,12 875,48 885,20 895,40 905,30 940,30 955,2 965,58 975,12 985,48 995,30 1030,30 1045,14 1055,46 1065,24 1075,36 1085,30 1120,30 1135,10 1145,50 1155,20 1165,40 1175,30 1200,30"/>
+  </svg>
+
+</section>
+
+<!-- ======================================================================
+     ABOUT SECTION
+     Two-column layout: bio text on left, stat cards on right.
+====================================================================== -->
+<section id="about">
+  <div class="container">
+
+    <!-- Section number label -->
+    <p class="section-label">01 — About</p>
+    <h2>Background</h2>
+
+    <div class="about-grid">
+
+      <!-- LEFT COLUMN: Bio text -->
+      <div>
+        <!-- Placeholder for personal bio — replace this text -->
+        <!-- <p class="about-bio">[ Bio coming soon ]</p> -->
+
+        <p class="about-body">
+          I work at the intersection of geophysics and machine learning, developing
+          tools and models that bridge traditional scientific methods with modern AI.
+          My background spans earthquake seismology, ambient noise tomography, RF
+          signal intelligence, and rare earth element characterization.
+          <br><br>
+          <!-- <br> is a line break — use sparingly. Better to use margin in CSS for spacing. -->
+          I hold a Ph.D. in Geophysics from the University of Utah (4.0 GPA) and
+          completed a Mendenhall Postdoctoral Fellowship at the USGS National
+          Earthquake Information Center before joining Idaho National Laboratory.
+        </p>
+      </div>
+
+      <!-- RIGHT COLUMN: Stats grid. Grid is defined in CSS, styles.css -->
+      <div class="stat-grid">
+        <!-- Each stat-card has a big number and a label -->
+        <div class="stat-card">
+          <div class="stat-num">6+</div>
+          <div class="stat-label">Peer-Reviewed Publications</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Patents</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">$1.1M+</div>
+          <div class="stat-label">Grants Awarded</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">10+</div>
+          <div class="stat-label">Conference Presentations</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     PROJECTS SECTION
+     Auto-filling responsive grid of project cards.
+     To add a project: copy one .project-card div block and update the content.
+====================================================================== -->
+<section id="projects">
+  <div class="container">
+    <p class="section-label">02 — Projects</p>
+    <h2>Selected Work</h2>
+
+    <div class="projects-grid">
+
+      <!-- PROJECT CARD TEMPLATE:
+           .project-domain  = category/field label (terracotta, mono font)
+           h3               = project title
+           p                = description
+           .project-tags    = tech stack pills at the bottom
+           
+           To link to a GitHub repo, wrap the h3 in an <a> tag:
+           <h3><a href="https://github.com/danedwells/chimera" target="_blank">Chimera</a></h3>
+      -->
+
+      <div class="project-card">
+        <p class="project-domain">AI Framework</p>
+        <h3>Chimera</h3>
+        <p>Flexible framework for accessible, automatic application of AI and ML to scientific data. Features auto-encoders and dimensionality reduction wrappers for rapid deployment across diverse input types.</p>
+        <div class="project-tags">
+          <span class="project-tag">Python</span>
+          <span class="project-tag">Autoencoders</span>
+          <span class="project-tag">Dimensionality Reduction</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <p class="project-domain">RF Signal Intelligence</p>
+        <h3>WiFIRE — Wireless Signal ML Pipeline</h3>
+        <p>ML pipeline for portable detection, classification, and open-set recognition of unknown wireless signals. Uses GANs, CNNs, and transformer architectures deployed on field hardware.</p>
+        <div class="project-tags">
+          <span class="project-tag">GANs</span>
+          <span class="project-tag">Transformers</span>
+          <span class="project-tag">Open-Set Recognition</span>
+          <span class="project-tag">GNU Radio</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <p class="project-domain">Seismology · Deep Learning</p>
+        <h3>Deep Learning Seismic Phase Picking (NEIC)</h3>
+        <p>ML-based pipeline for reliable global seismic P and S phase identification, built for integration into daily USGS NEIC operations. Extended existing architectures with improved training methods.</p>
+        <div class="project-tags">
+          <span class="project-tag">PyTorch</span>
+          <span class="project-tag">Seismology</span>
+          <span class="project-tag">USGS</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <p class="project-domain">Geoscience · ML</p>
+        <h3>GREENR — Rare Earth Element Geometallurgy</h3>
+        <p>Supervised ML for categorical monazite classification; addressing fundamental data scarcity challenges in rare earth element geoscience with global dataset curation.</p>
+        <div class="project-tags">
+          <span class="project-tag">scikit-learn</span>
+          <span class="project-tag">Geochemistry</span>
+          <span class="project-tag">Classification</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <p class="project-domain">Energy · Physics-Informed ML</p>
+        <h3>Geological Hydrogen Production</h3>
+        <p>Physics-informed neural networks to explore parameter space (temperature, grain size) for optimal subsurface serpentinization conditions, accelerating clean hydrogen production research.</p>
+        <div class="project-tags">
+          <span class="project-tag">PINNs</span>
+          <span class="project-tag">Multiphysics</span>
+          <span class="project-tag">Clean Energy</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <p class="project-domain">Cyber Security · Anomaly Detection</p>
+        <h3>Deep Learning Network Anomaly Detection</h3>
+        <p>Unsupervised and deep learning methods to identify anomalous network communication activity within INL infrastructure, targeting production deployment.</p>
+        <div class="project-tags">
+          <span class="project-tag">Anomaly Detection</span>
+          <span class="project-tag">Unsupervised ML</span>
+          <span class="project-tag">Cybersecurity</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     PUBLICATIONS SECTION
+     Each pub-item is a two-column row: year on left, content on right.
+     To add a publication: copy a .pub-item block and update all fields.
+     Remove the .pub-badge span for published work; keep it for in-prep.
+====================================================================== -->
+<section id="publications">
+  <div class="container">
+    <p class="section-label">03 — Publications</p>
+    <h2>Research</h2>
+
+    <div class="pub-list">
+
+      <!-- PUBLICATION ITEM TEMPLATE:
+           .pub-year    = year (left column)
+           .pub-venue   = journal or conference name
+           .pub-title   = paper title (italicized)
+           .pub-authors = author list — wrap your name in <strong>
+           .pub-link    = DOI or URL link (omit if no link yet)
+           .pub-badge   = "In Preparation" badge (omit for published papers)
+      -->
+
+      <div class="pub-item">
+        <div class="pub-year">2025</div>
+        <div>
+          <p class="pub-venue">IEEE Transactions on Signal Processing</p>
+          <p class="pub-title">A Comparative Analysis of Feature Extraction and Distance Loss Functions for Unknown Waveform Detection in the Time-Frequency Domain</p>
+          <p class="pub-authors"><strong>Wells, D.</strong>, Quach, A., Rajapakshe, O., & Saha, D.</p>
+          <span class="pub-badge">In Preparation</span>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-year">2025</div>
+        <div>
+          <p class="pub-venue">IEEE ICC 2025</p>
+          <p class="pub-title">Contrasting Time-Frequency Representations for Unknown Waveform Detection</p>
+          <p class="pub-authors">Wei, X., Saha, D., <strong>Wells, D.</strong>, & Quach, A.</p>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-year">2025</div>
+        <div>
+          <p class="pub-venue">Seismica</p>
+          <p class="pub-title">Evidence for interaction of Wasatch Fault segments at depth</p>
+          <p class="pub-authors"><strong>Wells, D. E.</strong>, Bartley, J., Pankow, K.L., & Baker, B.</p>
+          <span class="pub-badge">In Preparation</span>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-year">2024</div>
+        <div>
+          <p class="pub-venue">Bulletin of the Seismological Society of America</p>
+          <p class="pub-title">Wasatch Fault Structure from Machine Learning Arrival Times and High-Precision Earthquake Locations</p>
+          <p class="pub-authors"><strong>Wells, D. E.</strong>, Lomax, A., Baker, B., Niemz, P., Pankow, K.L., & Bartley, J.</p>
+          <!-- target="_blank" opens the link in a new browser tab -->
+          <a class="pub-link" href="https://doi.org/10.1785/0120230247" target="_blank">↗ DOI: 10.1785/0120230247</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-year">2022</div>
+        <div>
+          <p class="pub-venue">Journal of Geophysical Research: Solid Earth</p>
+          <p class="pub-title">Combining dense seismic arrays and broadband data to image the subsurface velocity structure in geothermally active South-central Utah</p>
+          <p class="pub-authors"><strong>Wells, D.</strong>, Lin, F. C., Pankow, K., Baker, B., & Bartley, J.</p>
+          <a class="pub-link" href="https://doi.org/10.1029/2022JB024070" target="_blank">↗ DOI: 10.1029/2022JB024070</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-year">2020</div>
+        <div>
+          <p class="pub-venue">Seismological Research Letters</p>
+          <p class="pub-title">Responding to the 2020 Magna, Utah earthquake sequence during the COVID-19 pandemic shutdown</p>
+          <p class="pub-authors">Pankow, K. L., ... <strong>Wells, D.</strong>, et al.</p>
+          <a class="pub-link" href="https://doi.org/10.1785/0220200265" target="_blank">↗ DOI: 10.1785/0220200265</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     CV SECTION
+     Two-column layout: Experience + Grants on left, Education + Patents on right.
+     The download button links to a PDF file in your repo root.
+     To enable it: add your CV PDF to the repo and update the href.
+====================================================================== -->
+<section id="cv">
+  <div class="container">
+    <p class="section-label">04 — CV</p>
+    <h2>Experience & Education</h2>
+
+    <div class="cv-inner">
+
+      <!-- LEFT COLUMN -->
+      <div>
+        <div class="cv-block">
+          <h3>Experience</h3>
+          <!-- Each cv-entry: role title, institution, date range -->
+          <div class="cv-entry">
+            <p class="cv-role">Research Data Scientist</p>
+            <p class="cv-place">Idaho National Laboratory</p>
+            <p class="cv-date">2024 – Present</p>
+          </div>
+          <div class="cv-entry">
+            <p class="cv-role">Mendenhall Postdoctoral Research Geophysicist</p>
+            <p class="cv-place">U.S. Geological Survey, Golden CO</p>
+            <p class="cv-date">2023 – 2024</p>
+          </div>
+          <div class="cv-entry">
+            <p class="cv-role">Graduate Research Assistant & Duty Seismologist</p>
+            <p class="cv-place">University of Utah</p>
+            <p class="cv-date">2018 – 2023</p>
+          </div>
+          <div class="cv-entry">
+            <p class="cv-role">Graduate Geophysics Intern</p>
+            <p class="cv-place">Sandia National Laboratories</p>
+            <p class="cv-date">2020 – 2023</p>
+          </div>
+        </div>
+
+        <div class="cv-block">
+          <h3>Grants & Funding</h3>
+          <div class="cv-entry">
+            <p class="cv-role">PI — NNSA (NA-241) · $130,000</p>
+            <p class="cv-place">Seismic Sensor Infrastructure at WIPP</p>
+            <p class="cv-date">2025</p>
+          </div>
+          <div class="cv-entry">
+            <p class="cv-role">Co-I — INL LDRD · $688,000</p>
+            <p class="cv-place">GREENR — Rare Earth Element Geometallurgy</p>
+            <p class="cv-date">2024</p>
+          </div>
+          <div class="cv-entry">
+            <p class="cv-role">Mendenhall Fellowship · ~$300,000</p>
+            <p class="cv-place">Machine Learning for Global Seismology</p>
+            <p class="cv-date">2023</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div>
+        <div class="cv-block">
+          <h3>Education</h3>
+          <div class="cv-entry">
+            <p class="cv-role">Ph.D. — Geophysics</p>
+            <p class="cv-place">University of Utah · 4.0 GPA</p>
+            <p class="cv-date">2018 – 2023</p>
+          </div>
+          <div class="cv-entry">
+            <p class="cv-role">B.S. — Geophysics</p>
+            <p class="cv-place">Western Washington University · 3.81 GPA</p>
+            <p class="cv-date">2012 – 2016</p>
+          </div>
+        </div>
+
+        <div class="cv-block">
+          <h3>Patents</h3>
+          <!-- Patent numbers use inline style to switch to monospace font -->
+          <div class="cv-entry">
+            <p class="cv-role" style="font-family:'DM Mono',monospace;font-size:0.8rem;">US202250192904A1</p>
+            <p class="cv-place">Spectrum Monitoring and Analysis (WiFIRE)</p>
+          </div>
+          <div class="cv-entry">
+            <p class="cv-role" style="font-family:'DM Mono',monospace;font-size:0.8rem;">US11251889B2</p>
+            <p class="cv-place">Wireless Signal Monitoring and Analysis (WiFIRE)</p>
+          </div>
+          <div class="cv-entry">
+            <p class="cv-role" style="font-family:'DM Mono',monospace;font-size:0.8rem;">US12418349B2</p>
+            <p class="cv-place">Spectrum Monitoring and Analysis (WiFIRE)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 
+      Download button — the `download` attribute tells the browser to download
+      the file instead of navigating to it. The file must be in the repo root.
+    -->
+    <div class="cv-download">
+      <a href="Wells_CV.pdf" class="btn btn-primary" download>↓ Download Full CV (PDF)</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     CONTACT SECTION
+     Two columns: intro text left, clickable contact links right.
+     Grayed-out links use inline style opacity:0.4 and pointer-events:none
+     as placeholders — remove those styles once you add real URLs.
+====================================================================== -->
+<section id="contact">
+  <div class="container">
+    <p class="section-label">05 — Contact</p>
+    <h2>Get in Touch</h2>
+
+    <div class="contact-grid">
+
+      <!-- LEFT: Intro text -->
+      <div>
+        <p class="contact-intro">
+          Open to research collaborations, consulting, and discussions at the intersection
+          of geophysics and machine learning. Feel free to reach out.
+        </p>
+        <!-- Inline style used here for a one-off tweak — fine for simple cases -->
+        <p style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);">
+          📍 Pocatello, ID 83201
+        </p>
+      </div>
+
+      <!-- RIGHT: Contact link rows -->
+      <div class="contact-links">
+
+        <!-- mailto: links open the user's email client -->
+        <a class="contact-link" href="mailto:danedwells@gmail.com">
+          <span class="contact-link-icon">Email</span>
+          danedwells@gmail.com
+        </a>
+
+        <!-- External links should use target="_blank" to open in a new tab -->
+        <a class="contact-link" href="https://www.linkedin.com/in/dan-wells-591b49a8" target="_blank">
+          <span class="contact-link-icon">LinkedIn</span>
+          dan-wells-591b49a8
+        </a>
+
+        <a class="contact-link" href="https://github.com/danedwells" target="_blank">
+          <span class="contact-link-icon">GitHub</span>
+          danedwells
+        </a>
+        
+        <!-- PLACEHOLDERS: Remove opacity/pointer-events and add real href when ready
+        <a class="contact-link" href="#" style="opacity:0.4;pointer-events:none;">
+          <span class="contact-link-icon">Scholar</span>
+          [ placeholder ]
+        </a>
+
+        <a class="contact-link" href="#" style="opacity:0.4;pointer-events:none;">
+          <span class="contact-link-icon">Twitter/X</span>
+          [ placeholder ]
+        </a>-->
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     FOOTER
+     Simple two-item row: copyright left, attribution right.
+====================================================================== -->
+<footer>
+  <p>© 2026 Daniel Wells, Ph.D.</p>
+  <p>Built with HTML · Hosted on GitHub Pages</p>
+</footer>
+
+</body>
+</html>
