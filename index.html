@@ -141,9 +141,66 @@
     <polyline> draws connected line segments between the x,y coordinate pairs in `points`.
     The jagged points are hand-crafted to look like a seismic waveform trace.
   -->
-  <svg class="waveform waveform-hero" viewBox="0 0 1200 60" preserveAspectRatio="none">
-    <polyline fill="none" stroke="#c9a96e" stroke-width="1.2"
-      points="0,30 40,30 50,10 60,50 70,15 80,45 90,28 105,30 130,30 145,5 155,55 165,20 175,40 185,30 220,30 235,8 245,52 255,18 265,42 275,30 310,30 325,12 335,48 345,22 355,38 365,30 400,30 415,4 425,56 435,14 445,46 455,30 490,30 500,20 510,40 520,25 530,35 540,30 580,30 595,6 605,54 615,16 625,44 635,30 670,30 685,10 695,50 705,18 715,42 725,30 760,30 775,8 785,52 795,22 805,38 815,30 850,30 865,12 875,48 885,20 895,40 905,30 940,30 955,2 965,58 975,12 985,48 995,30 1030,30 1045,14 1055,46 1065,24 1075,36 1085,30 1120,30 1135,10 1145,50 1155,20 1165,40 1175,30 1200,30"/>
+  <!-- 
+    Seismic waveform SVG decoration at the bottom of the hero.
+    This is an inline SVG (Scalable Vector Graphic) — resolution-independent art drawn in code.
+    viewBox="0 0 1200 60" defines the coordinate space: 1200 units wide, 60 tall.
+    preserveAspectRatio="none" lets it stretch to fill its container.
+    <polyline> draws connected line segments between the x,y coordinate pairs in `points`.
+    The jagged points are hand-crafted to look like a seismic waveform trace.
+  -->
+  <!--
+    Realistic seismic trace with P and S wave arrivals.
+    ViewBox is 1200 wide x 80 tall, centerline at y=40.
+
+    Four phases:
+    1. Pre-signal noise  (x=0–200):   tiny microseismic background noise
+    2. P wave arrival    (x=200–480): small, tight, high-frequency oscillations
+                                      P = compressional wave, arrives first, low amplitude
+    3. S wave arrival    (x=480–900): large, slow, high-amplitude oscillations
+                                      S = shear wave, arrives ~1.7x later, much more energy
+    4. Coda / decay      (x=900–1200): amplitude fades back to noise level
+
+    Dashed vertical lines mark P and S arrivals with labels.
+  -->
+  <svg class="waveform waveform-hero" viewBox="0 0 1200 80" preserveAspectRatio="none" style="height:80px;">
+
+    <!-- P arrival marker — terracotta dashed line -->
+    <line x1="200" y1="10" x2="200" y2="70" stroke="#b85c38" stroke-width="0.8" stroke-dasharray="3,3" opacity="0.5"/>
+    <!-- S arrival marker — sand dashed line -->
+    <line x1="480" y1="10" x2="480" y2="70" stroke="#c9a96e" stroke-width="0.8" stroke-dasharray="3,3" opacity="0.5"/>
+
+    <!-- Phase labels -->
+    <text x="204" y="18" font-family="monospace" font-size="8" fill="#b85c38" opacity="0.7">P</text>
+    <text x="484" y="18" font-family="monospace" font-size="8" fill="#c9a96e" opacity="0.7">S</text>
+
+    <!-- The seismic trace — one continuous polyline across all four phases -->
+    <polyline fill="none" stroke="#c9a96e" stroke-width="1.3" opacity="0.85"
+      points="
+        0,40 10,40 20,41 30,39 40,40 50,41 60,39 70,40 80,40 90,41
+        100,39 110,40 120,41 130,40 140,39 150,40 160,41 170,40 180,39 190,40
+        200,40
+        210,38 215,35 220,32 225,36 230,33 235,37 240,34 245,38
+        250,31 255,36 260,33 265,37 270,35 275,38 280,34 285,37
+        290,35 295,38 300,36 305,39 310,37 315,39 320,38 325,40
+        330,38 335,39 340,38 345,39 350,39 355,40 360,39 365,40
+        370,39 375,40 380,40 385,40 390,40 395,40 400,40
+        410,39 420,40 430,39 440,40 450,40 460,40 470,40
+        480,40
+        490,28 500,52 510,22 520,58 530,18 540,62
+        550,14 560,66 570,12 580,65 590,16 600,62
+        610,18 620,60 630,20 640,57 650,22 660,54
+        670,25 680,52 690,27 700,50 710,29 720,49
+        730,30 740,48 750,32 760,47 770,33 780,46
+        790,34 800,45 810,35 820,44 830,36 840,43
+        850,37 860,43 870,37 880,42 890,38 900,41
+        910,39 915,41 920,39 925,41 930,40 935,41
+        940,39 950,40 960,41 970,40 980,39 990,40
+        1000,41 1010,40 1020,39 1030,40 1040,41
+        1050,40 1060,39 1070,40 1080,41 1090,40
+        1100,40 1110,41 1120,40 1130,40 1140,41
+        1150,40 1160,40 1170,41 1180,40 1190,40 1200,40
+      "/>
   </svg>
 
 </section>
